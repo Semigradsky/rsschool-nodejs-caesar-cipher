@@ -1,0 +1,22 @@
+{
+  "name": "caesar-cipher-cli",
+  "version": "1.0.0",
+  "description": "Caesar cipher CLI tool",
+  "repository": "git@github.com:Semigradsky/rsschool-nodejs-caesar-cipher.git",
+  "author": "Dmitry Semigradsky <semigradskyd@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "dependencies": {
+    "meow": "^9.0.0"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "execa": "^5.0.0"
+  }
+}
