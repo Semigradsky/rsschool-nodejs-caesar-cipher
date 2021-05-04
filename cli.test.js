@@ -92,3 +92,45 @@ test('Error should be shown if can\'t create/open output file', async t => {
   t.is(error.exitCode, 2)
   t.assert(error.stderr.length > 0)
 })
+
+test('Should correctly encode string', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'encode', '--shift', 10], {
+    input: 'Hello World!',
+  })
+  t.is(stdout, 'Rovvy Gybvn!')
+})
+
+test('Should correctly encode string if shift is more than alphabet length', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'encode', '--shift', 36], {
+    input: 'Hello World!',
+  })
+  t.is(stdout, 'Rovvy Gybvn!')
+})
+
+test('Should correctly encode string if shift is negative', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'encode', '--shift', -16], {
+    input: 'Hello World!',
+  })
+  t.is(stdout, 'Rovvy Gybvn!')
+})
+
+test('Should correctly decode string', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'decode', '--shift', 10], {
+    input: 'Rovvy Gybvn!',
+  })
+  t.is(stdout, 'Hello World!')
+})
+
+test('Should correctly decode string if shift is more than alphabet length', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'decode', '--shift', 36], {
+    input: 'Rovvy Gybvn!',
+  })
+  t.is(stdout, 'Hello World!')
+})
+
+test('Should correctly decode string if shift is negative', async t => {
+  const { stdout } = await execa('./cli.js', ['--action', 'decode', '--shift', -16], {
+    input: 'Rovvy Gybvn!',
+  })
+  t.is(stdout, 'Hello World!')
+})

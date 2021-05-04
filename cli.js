@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import meow from 'meow'
+import { createDecipher, createCipher } from './cipher-stream.js'
 import { createReadStream, createWriteStream } from './streams.js'
 
 const cli = meow(`
@@ -51,6 +52,10 @@ const readable = createReadStream(input)
 const writable = createWriteStream(output)
 
 readable
+  .pipe(action === 'encode'
+    ? createCipher(shift)
+    : createDecipher(shift)
+  )
   .pipe(writable)
   .on('error', () => {
     console.error(`Failed! Can't write to '${output}'.`)
