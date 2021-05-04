@@ -10,7 +10,7 @@
     "node": ">=12"
   },
   "scripts": {
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "dependencies": {
     "meow": "^9.0.0"
