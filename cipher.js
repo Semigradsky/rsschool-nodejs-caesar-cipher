@@ -22,7 +22,7 @@ const process = (string, shift) => {
   }
 
   return output
-};
+}
 
 export const encode = (string, shift) => {
   return process(string, shift)

@@ -10,7 +10,8 @@
     "node": ">=12"
   },
   "scripts": {
-    "test": "c8 --reporter=html --reporter=text ava --verbose"
+    "test": "npm run lint && c8 --reporter=html --reporter=text ava --verbose",
+    "lint": "eslint *.js"
   },
   "dependencies": {
     "meow": "^9.0.0"
@@ -18,6 +19,7 @@
   "devDependencies": {
     "ava": "^3.15.0",
     "c8": "^7.7.2",
+    "eslint": "^7.25.0",
     "execa": "^5.0.0"
   }
 }
