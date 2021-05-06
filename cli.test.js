@@ -42,7 +42,7 @@ const output = './test-assets/output'
 
 test.serial.beforeEach(() => {
   if (fs.existsSync(output)) {
-    fs.rmSync(output)
+    fs.unlinkSync(output)
   }
 })
 
