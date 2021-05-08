@@ -46,9 +46,10 @@ const input = './test-assets/input'
 const output = './test-assets/output'
 
 test.serial.beforeEach(() => {
-  if (fs.existsSync(output)) {
-    fs.unlinkSync(output)
-  }
+  fs.writeFileSync(output, '', {
+    encoding: 'utf8',
+    flag: 'w',
+  })
 })
 
 test.serial('Should write to `stdout` if --output is not specified', async t => {
@@ -112,7 +113,18 @@ test('Error should be shown if can\'t open input file', async t => {
   }))
 })
 
-test('Error should be shown if can\'t create/open output file', async t => {
+test.serial('Error should be shown if output file doesn\'t exist', async t => {
+  fs.unlinkSync(output)
+
+  await errorIsShown(t, () => runApp({
+    '--action': 'encode',
+    '--shift': 0,
+    '--input': input,
+    '--output': output,
+  }))
+})
+
+test('Error should be shown if can\'t open output file', async t => {
   await errorIsShown(t, () => runApp({
     '--action': 'encode',
     '--shift': 0,

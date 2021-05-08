@@ -18,6 +18,14 @@ export const createWriteStream = (output) => {
     return process.stdout
   }
 
+  try {
+    fs.accessSync(output)
+  } catch (err) {
+    console.error(`Failed! Can't write to '${output}'.`)
+    console.error(`File doesn't exist or not accessible, please ensure that path is correct.`)
+    process.exit(2)
+  }
+
   return fs.createWriteStream(output, {
     encoding: 'utf8',
     flags: 'a',
